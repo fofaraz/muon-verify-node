@@ -1,0 +1,20 @@
+<template>
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-4-desktop is-6-tablet">
+                <br>
+                <br>
+                <div class="box">
+                <verify-modal/>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    import VerifyModal from "../../components/VerifyModal";
+
+    export default {
+        components: {VerifyModal}
+    }
+</script>
