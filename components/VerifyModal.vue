@@ -65,7 +65,7 @@
                 this.errorMessage = null;
                 if (typeof window.ethereum !== 'undefined') {
                     // Initialize web3.js
-                    const web3 =  new this.$web3(window.ethereum);
+                    const web3 = new Web3(window.ethereum);
                     // Request MetaMask to enable the current Ethereum account
                     await window.ethereum.enable();
 

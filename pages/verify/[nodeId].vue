@@ -5,12 +5,21 @@
                 <br>
                 <br>
                 <div class="box">
-                <verify-modal/>
+                    <verify-modal/>
                 </div>
             </div>
         </div>
     </div>
 </template>
+<script setup>
+    useHead({
+        script: [
+            {
+                src: "/js/web3.min.js",
+            },
+        ],
+    })
+</script>
 <script>
     import VerifyModal from "../../components/VerifyModal";
 
