@@ -9,16 +9,12 @@
             <div class="has-text-weight-bold">
                 Great!
             </div>
-            Your ownership successfully verified.
+            Verification successful.
         </div>
         <div v-else>
             <div class="mb-3">
-                To verify that you are the owner of the node with
-                <span class="tag is-medium">
-                ID&nbsp;{{nodeId}}
-            </span>
+                To verify that you have participated in pre-sale
                 , you need to sign the verification request using your staker address.
-
             </div>
             <div v-if="errorMessage" class="has-text-danger-dark my-2">
                 {{errorMessage}}
@@ -36,20 +32,7 @@
 
 
     export default {
-        name: "VerifyModal",
-        async setup() {
-            const route = useRoute();
-            const {data} =
-                useFetch(`/api/getNodeInfo`, {
-                    method: 'post',
-                    body: {
-                        nodeId: route.params.nodeId
-                    }
-
-                });
-
-            return {nodeInfo: data, nodeId: route.params.nodeId}
-        },
+        name: "VerifyPresale",
         data() {
             return {
                 isLoading: false,
@@ -69,22 +52,22 @@
                     // Request MetaMask to enable the current Ethereum account
                     await window.ethereum.enable();
 
-                    let address = this.nodeInfo.address;
-
-                    let signature = await web3.eth.personal.sign(`I am the owner of node ID ${this.nodeId}`, address, "");
+                    const accounts = await web3.eth.getAccounts();
+                    console.log("accounts " + accounts);
+                    const address = accounts[0];
+                    console.log("address " + address);
+                    let signature = await web3.eth.personal.sign(`I have participated in pre-sale`, address, "");
                     this.verify(signature);
                 } else {
                     this.errorMessage = 'Please install MetaMask to use this feature.';
                 }
             },
             verify(signature) {
-                console.log("signature " + signature);
                 this.isLoading = true;
-                $fetch('/api/verify', {
+                $fetch('/api/verify-presale', {
                     method: "post",
                     body: {
                         signature,
-                        nodeId: this.nodeId
                     }
                 })
                     .then((data) => {
