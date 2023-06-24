@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
     console.log("search result " + addressExistsInList);
     if (addressExistsInList){
         return {success: true};
-        assignRole(GUILD_ID,"1066815385472602113",ROLE_NAME);
+        DiscordBot.assignRole(GUILD_ID,"1066815385472602113",ROLE_NAME);
     }
 
     return {success: false, message: "Address verification failed."};
