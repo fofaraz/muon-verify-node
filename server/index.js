@@ -1,7 +1,10 @@
 import * as DiscordBot from './DiscordBot.js';
 import mongoose from "mongoose"
 
+
+
 export default async (_nitroApp) => {
+    DiscordBot.init();
     mongoose.connect(process.env.DB, {
         useNewUrlParser: true,
     })

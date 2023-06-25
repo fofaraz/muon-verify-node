@@ -3,7 +3,7 @@ import {list} from '../presale-list.js';
 import * as DiscordBot from '../DiscordBot.js';
 import PresaleVerify from "../models/PresaleVerify"
 
-DiscordBot.init();
+
 
 // const GUILD_ID = "830888887253073920";//muon
 const GUILD_ID = "1066816255488692255";//test
@@ -27,8 +27,12 @@ export default defineEventHandler(async (event) => {
     console.log("list length " + list.length);
     let addressExistsInList = list.includes(recoveredAddress);
     console.log("search result " + addressExistsInList);
-    // if (!addressExistsInList)
-    //     return {success: false, message: "This address have not participated in the presale."};
+    if (!addressExistsInList)
+        return {success: false, message: "This address have not participated in the presale."};
+
+    presaleVerify = await PresaleVerify.findOne({address: recoveredAddress});
+    if (presaleVerify)
+        return {success: false, message: "A discord user already verified with your address"};
 
 
     // @ts-ignore
