@@ -5,5 +5,8 @@ export default defineNuxtConfig({
         '@/assets/bulma/css/bulma.css',
     ],
     devtools: {enabled: false},
+    nitro:{
+        plugins:['~/server/index.js']
+    },
     ssr: false
 })

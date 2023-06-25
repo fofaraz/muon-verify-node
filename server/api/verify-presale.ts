@@ -1,14 +1,9 @@
 import {ethers} from 'ethers';
 import {list} from '../presale-list.js';
 import * as DiscordBot from '../DiscordBot.js';
+import PresaleVerify from "../models/PresaleVerify"
 
 DiscordBot.init();
-
-interface UserMap {
-    [userId: string]: boolean;
-}
-let addRoleLogs:UserMap = {};
-
 
 // const GUILD_ID = "830888887253073920";//muon
 const GUILD_ID = "1066816255488692255";//test
@@ -18,6 +13,12 @@ export default defineEventHandler(async (event) => {
 
     const body = await readBody(event);
 
+    // @ts-ignore
+    let presaleVerify = await PresaleVerify.findOne({discordUserId: body.discordId});
+    if (presaleVerify)
+        return {success: false, message: "Role already assigned to your discord user"};
+
+
 
     const message = `I have participated in the Muon presale using ${body.address} address.`;
     let recoveredAddress = ethers.verifyMessage(message, body.signature);
@@ -26,13 +27,15 @@ export default defineEventHandler(async (event) => {
     console.log("list length " + list.length);
     let addressExistsInList = list.includes(recoveredAddress);
     console.log("search result " + addressExistsInList);
-    if (!addressExistsInList)
-        return {success: false, message: "This address have not participated in the presale."};
+    // if (!addressExistsInList)
+    //     return {success: false, message: "This address have not participated in the presale."};
 
-    if(addRoleLogs[`recoveredAddress`])
-        return {success: false, message: "Role already assigned to your discord user"};
-    addRoleLogs[`recoveredAddress`] = true;
 
+    // @ts-ignore
+    await PresaleVerify.create({
+        discordUserId: body.discordId,
+        address: recoveredAddress
+    });
     DiscordBot.assignRole(GUILD_ID, body.discordId, ROLE_NAME);
     return {success: true};
 })

@@ -1,4 +1,5 @@
 import * as Discord from "discord.js";
+import PresaleVerify from "./models/PresaleVerify"
 
 
 const client = new Discord.Client({
@@ -17,8 +18,13 @@ client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.on('messageCreate', message => {
+client.on('messageCreate', async message => {
     console.log("messageCreate");
+
+    // @ts-ignore
+    let presaleVerify = await PresaleVerify.findOne({discordUserId: message.author.id});
+    if (presaleVerify)
+        return message.reply("The 'Presale Participant' role is already assigned to you.");
 
     if (message.channel.type != Discord.ChannelType.DM)
         return;
@@ -46,11 +52,19 @@ export async function assignRole(guildId, userId, roleName) {
     let guild = await client.guilds.fetch(guildId);
     let member = await guild.members.fetch(userId);
     const role = guild.roles.cache.find(role => role.name === roleName);
-    member.roles.add(role);
+    await member.roles.add(role);
+    sendMessage(userId,"Congratulations!  'Presale Participant' role is now assigned to you.")
 }
 
 export function init() {
     console.log("init discord bot");
+}
+
+export async function sendMessage(discordUserId,message) {
+    return await client.users.fetch(discordUserId, false)
+        .then((user) => {
+            return user.send(message);
+        })
 }
 
 // assignRole(GUILD_ID,"1066815385472602113",ROLE_NAME);

@@ -17,6 +17,7 @@
     "axios": "^1.4.0",
     "discord.js": "^14.11.0",
     "ethers": "^6.6.0",
+    "mongoose": "^7.3.1",
     "nuxt-web3": "^0.0.8",
     "nuxt-web3.js": "^0.1.5",
     "web3": "^4.0.1"
