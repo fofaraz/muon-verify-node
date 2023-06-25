@@ -2,7 +2,7 @@
     <div>
         <img src="/images/logo.svg" alt="" width="121" height="32" class="logo">
         <h1 class="title">
-            Node Verification
+            Presale Participation Verification
         </h1>
         <div v-if="successState" class="has-text-centered has-text-success-dark">
             <img src="/images/check.svg" alt="" width="100" height="100">
@@ -13,15 +13,16 @@
         </div>
         <div v-else>
             <div class="mb-3">
-                To verify that you have participated in pre-sale
-                , you need to sign the verification request using your staker address.
+                You need to verify the ownership of the wallet you have used to participate in the presale by signing a
+                message.
             </div>
             <div v-if="errorMessage" class="has-text-danger-dark my-2">
                 {{errorMessage}}
             </div>
             <button class="button is-success is-fullwidth is-medium"
                     :class="{'is-loading':isLoading}"
-                    @click="connect">Verify Signature
+                    @click="connect">
+                Sign
             </button>
         </div>
     </div>
@@ -33,6 +34,10 @@
 
     export default {
         name: "VerifyPresale",
+        async setup() {
+            const route = useRoute();
+            return {discordId: route.query.id}
+        },
         data() {
             return {
                 isLoading: false,
@@ -56,18 +61,20 @@
                     console.log("accounts " + accounts);
                     const address = accounts[0];
                     console.log("address " + address);
-                    let signature = await web3.eth.personal.sign(`I have participated in pre-sale`, address, "");
-                    this.verify(signature);
+                    let signature = await web3.eth.personal.sign(`I have participated in the Muon presale using ${address} address.`, address, "");
+                    this.verify(signature, address);
                 } else {
                     this.errorMessage = 'Please install MetaMask to use this feature.';
                 }
             },
-            verify(signature) {
+            verify(signature, address) {
                 this.isLoading = true;
                 $fetch('/api/verify-presale', {
                     method: "post",
                     body: {
                         signature,
+                        address,
+                        discordId: this.discordId
                     }
                 })
                     .then((data) => {

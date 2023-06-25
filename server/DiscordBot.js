@@ -1,7 +1,7 @@
 import * as Discord from "discord.js";
 
 
-const MSG_INSTRUCTIONS = "Hi, Please go to the following link to verify that you participated in pre-sale\nhttps://discord-bot.muon.net/verify-presale";
+const MSG_INSTRUCTIONS = "Hi, Please go to the following link to verify that you participated in pre-sale";
 
 const client = new Discord.Client({
     intents: [
@@ -25,17 +25,25 @@ client.on('messageCreate', message => {
         return;
     if (message.author.bot)
         return;
-    message.reply(MSG_INSTRUCTIONS);
+
+    const row = new Discord.ActionRowBuilder()
+        .addComponents(
+            new Discord.ButtonBuilder()
+                .setLabel('Verify')
+                .setStyle(Discord.ButtonStyle.Link)
+                .setURL(`https://discord-bot.muon.net/verify-presale?id=${message.author.id}`)
+        );
+
+    message.reply({
+        content: MSG_INSTRUCTIONS,
+        components: [row],
+    });
 });
 
 export async function assignRole(guildId, userId, roleName) {
     let guild = await client.guilds.fetch(guildId);
-    console.log("guild");
-    console.log(guild);
     let member = await guild.members.fetch(userId);
-    console.log(member);
     const role = guild.roles.cache.find(role => role.name === roleName);
-    console.log(role);
     member.roles.add(role);
 }
 
