@@ -1,8 +1,6 @@
 import * as Discord from "discord.js";
 
 
-const MSG_INSTRUCTIONS = "Hi, Please go to the following link to verify that you participated in pre-sale";
-
 const client = new Discord.Client({
     intents: [
         Discord.GatewayIntentBits.Guilds,
@@ -21,6 +19,7 @@ client.on('ready', () => {
 
 client.on('messageCreate', message => {
     console.log("messageCreate");
+
     if (message.channel.type != Discord.ChannelType.DM)
         return;
     if (message.author.bot)
@@ -34,6 +33,8 @@ client.on('messageCreate', message => {
                 .setURL(`https://discord-bot.muon.net/verify-presale?id=${message.author.id}`)
         );
 
+    const MSG_INSTRUCTIONS = `Hey ${message.author.username}\nUse the following button to verify that you have participated in the Muon presale.`
+
     message.reply({
         content: MSG_INSTRUCTIONS,
         components: [row],
@@ -41,6 +42,7 @@ client.on('messageCreate', message => {
 });
 
 export async function assignRole(guildId, userId, roleName) {
+    console.log("assignRole " + userId);
     let guild = await client.guilds.fetch(guildId);
     let member = await guild.members.fetch(userId);
     const role = guild.roles.cache.find(role => role.name === roleName);

@@ -12,10 +12,14 @@ let addRoleLogs:UserMap = {};
 
 // const GUILD_ID = "830888887253073920";//muon
 const GUILD_ID = "1066816255488692255";//test
-const ROLE_NAME = "ALICE Node Operator";
+const ROLE_NAME = "Presale Participant";
 
 export default defineEventHandler(async (event) => {
+
     const body = await readBody(event);
+
+    DiscordBot.assignRole(GUILD_ID, body.discordId, ROLE_NAME);
+    return;
 
     const message = `I have participated in the Muon presale using ${body.address} address.`;
     let recoveredAddress = ethers.verifyMessage(message, body.signature);

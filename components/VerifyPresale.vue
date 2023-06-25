@@ -13,8 +13,7 @@
         </div>
         <div v-else>
             <div class="mb-3">
-                You need to verify the ownership of the wallet you have used to participate in the presale by signing a
-                message.
+                The role of "Presale Participant" has been assigned to you on the Muon Discord server. You may now return to Discord.
             </div>
             <div v-if="errorMessage" class="has-text-danger-dark my-2">
                 {{errorMessage}}
