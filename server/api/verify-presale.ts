@@ -3,10 +3,6 @@ import {list} from '../presale-list.js';
 import * as DiscordBot from '../DiscordBot.js';
 import PresaleVerify from "../models/PresaleVerify"
 
-
-
-// const GUILD_ID = "830888887253073920";//muon
-const GUILD_ID = "1066816255488692255";//test
 const ROLE_NAME = "Presale Participant";
 
 export default defineEventHandler(async (event) => {
@@ -17,7 +13,6 @@ export default defineEventHandler(async (event) => {
     let presaleVerify = await PresaleVerify.findOne({discordUserId: body.discordId});
     if (presaleVerify)
         return {success: false, message: "Role already assigned to your discord user"};
-
 
 
     const message = `I have participated in the Muon presale using ${body.address} address.`;
@@ -40,6 +35,8 @@ export default defineEventHandler(async (event) => {
         discordUserId: body.discordId,
         address: recoveredAddress
     });
-    DiscordBot.assignRole(GUILD_ID, body.discordId, ROLE_NAME);
+    DiscordBot.assignRole(process.env.GUILD_ID, body.discordId, ROLE_NAME);
     return {success: true};
 })
+
+// DiscordBot.assignRole(process.env.GUILD_ID,"1066815385472602113",ROLE_NAME);
