@@ -39,7 +39,7 @@ client.on('messageCreate', async message => {
                 .setURL(`https://discord-bot.muon.net/verify-presale?id=${message.author.id}`)
         );
 
-    const MSG_INSTRUCTIONS = `Hey ${message.author.username}\nUse the following button to verify that you have participated in the Muon presale.`
+    const MSG_INSTRUCTIONS = `Hi\nUse the following button to verify that you have participated in the Muon presale.`
 
     message.reply({
         content: MSG_INSTRUCTIONS,
