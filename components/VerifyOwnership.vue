@@ -25,7 +25,6 @@
                 Sign
             </button>
         </div>
-        <button @click="test" class="button is-fullwidth mt-5">test</button>
     </div>
 </template>
 
