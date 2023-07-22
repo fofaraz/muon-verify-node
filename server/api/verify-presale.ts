@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
     let addressExistsInList = list.includes(recoveredAddress);
     console.log("search result " + addressExistsInList);
     if (!addressExistsInList)
-        return {success: false, message: "This address have not participated in the presale."};
+        return {success: false, message: "This address has not participated in the presale."};
 
     presaleVerify = await PresaleVerify.findOne({address: recoveredAddress});
     if (presaleVerify)

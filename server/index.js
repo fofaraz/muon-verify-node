@@ -1,13 +1,12 @@
 import * as DiscordBot from './DiscordBot.js';
+import * as DiscordBotOwnershipVerify from './DiscordBotOwnershipVerify.js';
 import mongoose from "mongoose"
-
 
 
 export default async (_nitroApp) => {
     DiscordBot.init();
-    mongoose.connect(process.env.DB, {
-        useNewUrlParser: true,
-    })
+    DiscordBotOwnershipVerify.init();
+    mongoose.connect(process.env.DB)
         .then(() => {
             console.log("Connected to Mongodb")
         })
