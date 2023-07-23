@@ -29,13 +29,23 @@ export default defineEventHandler(async (event) => {
     if (presaleVerify)
         return {success: false, message: "A discord user already verified with your address"};
 
+    let assignRoleResult = await DiscordBot.assignRole(process.env.GUILD_ID, body.discordId, ROLE_NAME)
+        .then(() => {
+            return {success: true, message: ""}
+        })
+        .catch((err => {
+            console.log(err);
+            return {success: false, message: err.message}
+        }));
+    if (!assignRoleResult.success)
+        return {success: false, message: assignRoleResult.message};
 
     // @ts-ignore
     await PresaleVerify.create({
         discordUserId: body.discordId,
         address: recoveredAddress
     });
-    DiscordBot.assignRole(process.env.GUILD_ID, body.discordId, ROLE_NAME);
+
     return {success: true};
 })
 
