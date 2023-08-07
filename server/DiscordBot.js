@@ -12,7 +12,6 @@ const client = new Discord.Client({
     ],
     partials: [Discord.Partials.Channel]
 });
-console.log("logn discord bot ");
 client.login(process.env.BOT_TOKEN);
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
