@@ -18,7 +18,8 @@ client.on('ready', () => {
 });
 
 client.on('messageCreate', async message => {
-    console.log("messageCreate");
+    if (message.author.id == 1066815385472602113)
+        console.log("messageCreate", message.author.username);
 
     // @ts-ignore
     let presaleVerify = await PresaleVerify.findOne({discordUserId: message.author.id});
@@ -52,14 +53,14 @@ export async function assignRole(guildId, userId, roleName) {
     let member = await guild.members.fetch(userId);
     const role = guild.roles.cache.find(role => role.name === roleName);
     await member.roles.add(role);
-    sendMessage(userId,"Congratulations!  'Presale Participant' role is now assigned to you.")
+    sendMessage(userId, "Congratulations!  'Presale Participant' role is now assigned to you.")
 }
 
 export function init() {
     console.log("init discord bot");
 }
 
-export async function sendMessage(discordUserId,message) {
+export async function sendMessage(discordUserId, message) {
     return await client.users.fetch(discordUserId, false)
         .then((user) => {
             return user.send(message);

@@ -8,7 +8,8 @@ let schema = new Schema(
         lastStateChange: Date,
         lastCheck: Date,
         verified: {type: Boolean, default: false},
-        sendMessage: {type: Number, default: 0}
+        sendMessage: {type: Number, default: 0},
+        muonVersion: {type: Number, default: 0}
     },
     {timestamps: true}
 );
