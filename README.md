@@ -1,15 +1,17 @@
 # MUON Verify Bot
 
-This project makes a discord bot that is used to verify node owners of the muon project
+This project involves creating a Discord bot designed to verify node owners within the Muon project.
 
 ## Setup
 
-Run `npm i` to install the dependencies.
+Execute `npm i` to install the necessary dependencies.
 
-Make a copy of the ".envexample" file and rename it to ".env" and set up its values
+Duplicate the ".envexample" file, renaming the copy to ".env," and configure its values accordingly.
+
+Additionally, ensure there is a running instance of MongoDB; place the MongoDB connection string within the "DB" variable in the ".env" file.
 
 ## RUN
-Run this projct using 
+You can build and run this projct using following commands:
 ```
 npm run build
 node .output/server/index.mjs
