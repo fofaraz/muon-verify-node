@@ -15,4 +15,4 @@ let schema = new Schema(
 );
 
 
-export default model<any>("discord_users", schema);
+export default model<any>("discord_users_v2", schema);

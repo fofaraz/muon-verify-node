@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img src="/images/logo.svg" alt="" width="121" height="32" class="logo">
+        <img src="/images/Alice_Logo.png" alt="" width="144" height="50" class="logo">
         <h1 class="title">
             Verify Your Node Ownership
         </h1>
@@ -14,7 +14,7 @@
         </div>
         <div v-else>
             <div class="mb-3">
-                You need to verify the ownership of your node by signing a message.
+                You need to verify the ownership of your node by signing a message using the address you used to stake and add your node to the network.
             </div>
             <div v-if="errorMessage" class="has-text-danger-dark my-2">
                 {{errorMessage}}
@@ -94,6 +94,6 @@
 
 <style scoped>
     .logo {
-        height: 60px;
+        height: 50px;
     }
 </style>
