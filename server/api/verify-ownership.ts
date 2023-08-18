@@ -21,8 +21,7 @@ export default defineEventHandler(async (event) => {
     recoveredAddress = recoveredAddress.toLowerCase();
     console.log("recoveredAddress " + recoveredAddress);
 
-    //todo double check if we should compare to stakerAddress
-    if (nodeInfo.result.node.stakerAddress != recoveredAddress)
+    if (nodeInfo.result.node.stakerAddress.toLowerCase() != recoveredAddress)
         return {success: false, message: "The signer address is not the same as node's staker address."};
 
 

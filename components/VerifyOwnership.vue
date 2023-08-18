@@ -1,7 +1,7 @@
 <template>
     <div>
         <img src="/images/Alice_Logo.png" alt="" width="144" height="50" class="logo">
-        <h1 class="title">
+        <h1 class="is-size-4 has-text-weight-bold">
             Verify Your Node Ownership
         </h1>
         <div v-if="successState" class="has-text-centered has-text-success-dark">
