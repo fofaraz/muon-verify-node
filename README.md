@@ -1,6 +1,6 @@
 # MUON Verify Bot
 
-This project involves creating a Discord bot designed to verify node owners within the Muon project.
+This project involves creating a Discord bot designed to verify node owners of the Muon network.
 
 ## Setup
 
