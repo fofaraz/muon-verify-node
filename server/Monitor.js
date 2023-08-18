@@ -14,7 +14,6 @@ async function loadNodes() {
             if (data.success) {
                 nodeResponseLoaded = true;
                 nodesResponse = data.result;
-                console.log("nodesResponse",nodesResponse.length);
             }
         })
         .catch((e) => {
@@ -27,7 +26,6 @@ async function loadNodes() {
         .then(({data}) => {
             if (data.success) {
                 onlineNodes = data.result;
-                console.log("onlineNodes",onlineNodes.length);
             }
         })
         .catch((e) => {
