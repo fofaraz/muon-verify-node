@@ -22,8 +22,8 @@ export default defineEventHandler(async (event) => {
     console.log("recoveredAddress " + recoveredAddress);
     console.log("compare to", nodeInfo.result.node.stakerAddress.toLowerCase());
 
-    // if (nodeInfo.result.node.stakerAddress.toLowerCase() != recoveredAddress)
-    //     return {success: false, message: "The signer address is not the same as node's staker address."};
+    if (nodeInfo.result.node.stakerAddress.toLowerCase() != recoveredAddress)
+        return {success: false, message: "The signer address is not the same as node's staker address."};
 
 
     let discordUserId = body.discordId;
