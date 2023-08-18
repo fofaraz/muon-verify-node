@@ -12,7 +12,7 @@ const client = new Discord.Client({
     ],
     partials: [Discord.Partials.Channel]
 });
-client.login(process.env.BOT_TOKEN);
+client.login(process.env.BOT_TOKEN_PRESALE);
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 });

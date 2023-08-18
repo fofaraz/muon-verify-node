@@ -50,7 +50,7 @@ export async function setidCommandHandler(interaction) {
 
     let newState = await Monitor.getNewState(id);
     let query = {discordUserId: userId};
-    let update = {nodeId: id, lastPeerState: newState, muonVersion: 2};
+    let update = {nodeId: id, lastPeerState: newState, muonVersion: 2, verified: false};
     let options = {upsert: true, new: true, setDefaultsOnInsert: true};
     await DiscordUser.findOneAndUpdate(query, update, options);
 

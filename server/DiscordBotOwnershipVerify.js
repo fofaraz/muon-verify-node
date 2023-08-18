@@ -14,7 +14,7 @@ const commands = [
     setid.setIdCommand,
     {name: 'info', description: 'Replies your current settings and info!'},
 ];
-const rest = new Discord.REST({version: '10'}).setToken(process.env.BOT_TOKEN);
+const rest = new Discord.REST({version: '10'}).setToken(process.env.BOT_TOKEN_OWNERSHIP_VERIFY);
 (async () => {
     try {
         await rest.put(Discord.Routes.applicationCommands(process.env.CLIENT_ID_OWNERSHIP_VERIFY), {body: commands});

@@ -1,63 +1,12 @@
-# Nuxt 3 Minimal Starter
+# MUON Verify Bot
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This project makes a discord bot that is used to verify node owners of the muon project
 
 ## Setup
 
-Make sure to install the dependencies:
+Run `npm i` to install the dependencies.
 
-```bash
-# npm
-npm install
+Make a copy of the ".envexample" file and rename it to ".env" and set up its values
 
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## RUN
+Run this projct using `npm run build` or use `docker-compose up -d --build` to run it inside a docker container
