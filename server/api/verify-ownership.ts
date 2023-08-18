@@ -10,7 +10,7 @@ const ROLE_NAME = "ALICE Node Operator";
 export default defineEventHandler(async (event) => {
     const body = await readBody(event);
 
-    let nodeInfo = await axios.get(`http://monitor1.muon.net/nodes/${body.nodeId}`);
+    let nodeInfo = await axios.get(`${process.env.ALICE_V2_MONITOR}/nodes/${body.nodeId}`);
     nodeInfo = nodeInfo.data;
     // console.log("nodeInfo", nodeInfo);
     if (!nodeInfo || !nodeInfo.success)
