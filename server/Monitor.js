@@ -6,13 +6,28 @@ import Promise from "bluebird";
 
 let nodeResponseLoaded = false;
 let nodesResponse = [];
+let onlineNodes = [];
 
 async function loadNodes() {
-    axios.get(`${process.env.ALICE_V2_MONITOR}/nodes`)
+    axios.get(`${process.env.ALICE_V2_MONITOR}/nodes?filter=all`)
         .then(({data}) => {
             if (data.success) {
                 nodeResponseLoaded = true;
                 nodesResponse = data.result;
+                console.log("nodesResponse",nodesResponse.length);
+            }
+        })
+        .catch((e) => {
+            console.log("error checkActiveNodes: " + e.message);
+            return false;
+        });
+
+
+    axios.get(`${process.env.ALICE_V2_MONITOR}/nodes`)
+        .then(({data}) => {
+            if (data.success) {
+                onlineNodes = data.result;
+                console.log("onlineNodes",onlineNodes.length);
             }
         })
         .catch((e) => {
@@ -79,7 +94,7 @@ export function getNodeInfo(peerId) {
 
 
 export async function getNewState(peerId) {
-    let nodeInfo = getNodeInfo(peerId);
+    let nodeInfo = onlineNodes.find(element => element.id == peerId);
     let newState = nodeInfo ? "Online" : "Offline";
     return newState;
 }
