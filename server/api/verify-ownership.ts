@@ -20,6 +20,7 @@ export default defineEventHandler(async (event) => {
     let recoveredAddress = ethers.verifyMessage(message, body.signature);
     recoveredAddress = recoveredAddress.toLowerCase();
     console.log("recoveredAddress " + recoveredAddress);
+    console.log("compare to", nodeInfo.result.node.stakerAddress.toLowerCase());
 
     if (nodeInfo.result.node.stakerAddress.toLowerCase() != recoveredAddress)
         return {success: false, message: "The signer address is not the same as node's staker address."};
@@ -29,7 +30,10 @@ export default defineEventHandler(async (event) => {
 
     let discordUser = await DiscordUser.findOne({discordUserId});
     if (!discordUser)
-        return {success: false, message: "Your Node ID not Found! Please get back to discord and send message to the bot"};
+        return {
+            success: false,
+            message: "Your Node ID not Found! Please get back to discord and send message to the bot"
+        };
     if (discordUser.verified)
         return {success: false, message: "This Node ID already owned by another discord user"};
 
