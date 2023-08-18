@@ -14,7 +14,8 @@
         </div>
         <div v-else>
             <div class="mb-3">
-                You need to verify the ownership of your node by signing a message using the address you used to stake and add your node to the network.
+                You need to verify the ownership of your node by signing a message using the address you used to stake
+                and add your node to the network.
             </div>
             <div v-if="errorMessage" class="has-text-danger-dark my-2">
                 {{errorMessage}}
@@ -61,7 +62,9 @@
                     console.log("accounts " + accounts);
                     const address = accounts[0];
                     console.log("address " + address);
-                    let signature = await web3.eth.personal.sign(`I am the owner of node with ID ${this.nodeId}`, address, "");
+                    let message = `I am the owner of the node #${this.nodeId} on the ALICE network.`;
+                    // let message = `I am the owner of node with ID ${this.nodeId}`;
+                    let signature = await web3.eth.personal.sign(message, address, "");
                     this.verify(signature, this.nodeId);
                 } else {
                     this.errorMessage = 'Please install MetaMask to use this feature.';
