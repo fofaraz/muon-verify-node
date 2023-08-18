@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
     const message = `I am the owner of node with ID ${body.nodeId}`;
     let recoveredAddress = ethers.verifyMessage(message, body.signature);
     recoveredAddress = recoveredAddress.toLowerCase();
-    // console.log("recoveredAddress " + recoveredAddress);
+    console.log("recoveredAddress " + recoveredAddress);
 
     //todo double check if we should compare to stakerAddress
     if (nodeInfo.result.node.stakerAddress != recoveredAddress)
