@@ -5,7 +5,7 @@ import * as Monitor from "./Monitor";
 
 
 const MSG_INSTRUCTIONS = "Hi, I am Muon's Network Bot." +
-    "\nTo monitor the status of your Muon node, use the </setid:1085110640269590590> command to provide me with your Muon node's ID number." +
+    "\nTo monitor the status of your Muon node, use the </setid:1142717723407822930> command to provide me with your Muon node's ID number." +
     "\nOnce you've provided me with this information, I will periodically check your node's status and notify you when it goes offline or online." +
     "\nThis way, you can stay informed about the health of your Muon node and take appropriate actions if needed.";
 
