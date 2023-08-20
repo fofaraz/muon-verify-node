@@ -4,7 +4,7 @@ import DiscordUser from "../models/DiscordUser"
 import * as DiscordBotOwnershipVerify from "../DiscordBotOwnershipVerify";
 
 
-const ROLE_NAME = "ALICE Node Operator";
+const ROLE_NAME = "ALICE V2 Node Operator";
 
 
 export default defineEventHandler(async (event) => {
@@ -37,7 +37,7 @@ export default defineEventHandler(async (event) => {
     if (discordUser.verified)
         return {success: false, message: "This Node ID already owned by another discord user"};
 
-    let assignRoleResult = await DiscordBotOwnershipVerify.assignRole(process.env.GUILD_ID_TEST, body.discordId, ROLE_NAME)
+    let assignRoleResult = await DiscordBotOwnershipVerify.assignRole(process.env.GUILD_ID, body.discordId, ROLE_NAME)
         .then(() => {
             return {success: true, message: ""}
         })
