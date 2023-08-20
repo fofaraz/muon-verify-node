@@ -12,12 +12,16 @@ Additionally, ensure there is a running instance of MongoDB; place the MongoDB c
 
 ## RUN
 To build and run this project using on local machine you need to install env-cmd package
+ 
  `npm install -g env-cmd`
-then use following commands:
-```
-npm run build
-env-cmd node .output/server/index.mjs 
-```
+
+then build the project :
+
+`npm run build`
+
+then run the project using following command:
+
+`env-cmd node .output/server/index.mjs`
 
 or if using pm2:
 
