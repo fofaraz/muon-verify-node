@@ -1,5 +1,6 @@
 import * as Discord from "discord.js";
 import * as setid from "./bot_commands/setid";
+import * as info from "./bot_commands/info";
 import * as MessageManager from "./MessageManager";
 import * as Monitor from "./Monitor";
 
