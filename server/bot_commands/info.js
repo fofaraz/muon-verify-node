@@ -1,12 +1,14 @@
 import DiscordUser from "../models/DiscordUser";
 
-exports.myInfoCommand = async function (interaction) {
+
+export async function myInfoCommand(interaction) {
+    console.log("myInfoCommand");
     await interaction.reply('Collecting your info...');
 
     let discordUserId = interaction.user.id;
     let discordUser = await DiscordUser.findOne({discordUserId: discordUserId});
     if (!discordUser)
-        return interaction.followUp("No data registered for you. To get started, you can use </setid:1085110640269590590> command to set your node's ID");
+        return interaction.followUp("No data registered for you. To get started, you can use </setid:1142717723407822930> command to set your node's ID");
 
     let message = "";
     message += "Node ID: " + discordUser.nodeId + "\n";

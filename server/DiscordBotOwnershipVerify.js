@@ -61,6 +61,7 @@ client.on('interactionCreate', async (interaction) => {
         } else if (interaction.commandName === 'setid') {
             setid.setidCommandHandler(interaction)
         } else if (interaction.commandName === 'info') {
+            console.log("123");
             info.myInfoCommand(interaction)
         }
     } catch (e) {
