@@ -37,8 +37,8 @@ async function loadNodes() {
 loadNodes();
 setInterval(loadNodes, 60000);
 
-export function getNodesCount() {
-    return nodesResponse.length;
+export function getOnlineNodesCount() {
+    return onlineNodes.length;
 }
 
 

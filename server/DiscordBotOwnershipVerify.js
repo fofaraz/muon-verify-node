@@ -86,7 +86,7 @@ export function init() {
 }
 
 async function setNickname() {
-    let nodesCount = Monitor.getNodesCount();
+    let nodesCount = Monitor.getOnlineNodesCount();
     if (!nodesCount) return;
     let nickname = nodesCount + " Running Nodes";
     client.guilds.cache.forEach((guild) => {
