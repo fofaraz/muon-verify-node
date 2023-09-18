@@ -1,5 +1,6 @@
 import axios from "axios"
 import DiscordUser from "./models/DiscordUser";
+import StatusLogs from "./models/StatusLogs";
 import * as MessageManager from "./MessageManager";
 import * as DiscordBotOwnershipVerify from "./DiscordBotOwnershipVerify";
 import Promise from "bluebird";
@@ -54,7 +55,6 @@ async function checkAll() {
     inProgress = true;
 
     let discordUsers = await DiscordUser.find({verified: true, muonVersion: 2});
-
     Promise.map(discordUsers, async (discordUser) => {
         let lastPeerState = discordUser.lastPeerState;
         try {
@@ -62,7 +62,12 @@ async function checkAll() {
             discordUser.lastPeerState = newState;
             discordUser.lastCheck = Date.now();
             await discordUser.save();
-            if (lastPeerState != discordUser.lastPeerState) {
+            if (lastPeerState != newState) {
+                await StatusLogs.create({
+                    nodeId: discordUser.nodeId,
+                    status: newState,
+                    discordUserId: discordUser.discordUserId
+                });
                 discordUser.lastStateChange = Date.now();
                 await discordUser.save();
 
@@ -99,5 +104,45 @@ export async function getNewState(peerId) {
 
 
 checkAll();
-
 setInterval(checkAll, 30000);
+
+async function reminder() {
+    let findQuery = {
+        createdAt: {
+            $lt: new Date(new Date() - 60 * 60 * 1000),
+            $gt: new Date(new Date() - 2 * 60 * 60 * 1000)
+        },
+        isReminderSent: false
+    };
+
+    let statusLogs = await StatusLogs.aggregate([
+        {$match: findQuery},
+        {$sort: {"_id": -1}},
+        {$group: {_id: '$nodeId', doc: {$first: '$$ROOT'}}},
+        {$replaceRoot: {newRoot: '$doc'}},
+    ]);
+
+    let nodeIds = [];
+    for (let i = 0; i < statusLogs.length; i++) {
+        let statusLog = statusLogs[i];
+        nodeIds.push(statusLog.nodeId);
+
+        let newState = await getNewState(statusLog.nodeId);
+        if (newState == statusLog.status) {
+            let message = "Reminder. Your node status is: " + statusLog.status;
+            if (statusLog.status == "Online")
+                message = "✅ Everything is looking good. Your node is up and running";
+            else if (statusLog.status == "Offline")
+                message = "This is a reminder to inform you that your node has been offline for some time.";
+
+            MessageManager.sendMessageToDiscordId(DiscordBotOwnershipVerify.client, statusLog.discordUserId, message)
+                .catch(e => {
+                    console.log(e.message);
+                });
+        }
+    }
+    await StatusLogs.updateMany({nodeId: {$in: nodeIds}}, {isReminderSent: true});
+}
+
+reminder();
+setInterval(reminder, 10 * 60 * 1000);
