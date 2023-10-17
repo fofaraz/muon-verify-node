@@ -38,7 +38,7 @@ export const client = new Discord.Client({
 client.login(process.env.BOT_TOKEN_OWNERSHIP_VERIFY);
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
-    client.user.setActivity('ALICE Network', {type: Discord.ActivityType.Watching});
+    client.user.setActivity('PION Network', {type: Discord.ActivityType.Watching});
 });
 
 client.on('messageCreate', message => {
