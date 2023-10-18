@@ -62,7 +62,7 @@
                     console.log("accounts " + accounts);
                     const address = accounts[0];
                     console.log("address " + address);
-                    let message = `I am the owner of the node #${this.nodeId} on the ALICE network.`;
+                    let message = `I am the owner of the node #${this.nodeId} on the PION network.`;
                     // let message = `I am the owner of node with ID ${this.nodeId}`;
                     let signature = await web3.eth.personal.sign(message, address, "");
                     this.verify(signature, this.nodeId);

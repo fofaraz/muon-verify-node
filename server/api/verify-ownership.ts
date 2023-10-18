@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
     if (!nodeInfo || !nodeInfo.success)
         return {success: false, message: "Node info not found."};
 
-    const message = `I am the owner of the node #${body.nodeId} on the ALICE network.`;
+    const message = `I am the owner of the node #${body.nodeId} on the PION network.`;
     let recoveredAddress = ethers.verifyMessage(message, body.signature);
     recoveredAddress = recoveredAddress.toLowerCase();
     console.log("recoveredAddress " + recoveredAddress);
