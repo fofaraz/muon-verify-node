@@ -4,7 +4,7 @@ import DiscordUser from "../models/DiscordUser"
 import * as DiscordBotOwnershipVerify from "../DiscordBotOwnershipVerify";
 
 
-const ROLE_NAME = "ALICE V2 Node Operator";
+const ROLE_NAME = "PION Node Operator";
 
 
 export default defineEventHandler(async (event) => {

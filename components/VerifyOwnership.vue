@@ -9,7 +9,7 @@
             <div class="has-text-weight-bold">
                 Great!
             </div>
-            The role of "ALICE v2 Node Operator" has been assigned to you on the Muon Discord server.
+            The role of "PION Node Operator" has been assigned to you on the Muon Discord server.
             You may now return to Discord.
         </div>
         <div v-else>
