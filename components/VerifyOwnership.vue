@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img src="/images/Alice_Logo.png" alt="" width="144" height="50" class="logo">
+        <img src="/images/logo.svg" alt="" width="121" height="32" class="logo">
         <h1 class="is-size-4 has-text-weight-bold">
             Verify Your Node Ownership
         </h1>
