@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img src="/images/logo.svg" alt="" width="121" height="32" class="logo">
+        <img src="/images/pion-logo.png" alt="" width="344" height="100" class="logo">
         <h1 class="is-size-4 has-text-weight-bold">
             Verify Your Node Ownership
         </h1>
