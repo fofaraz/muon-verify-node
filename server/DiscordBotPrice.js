@@ -69,10 +69,6 @@ async function setNicknameMarket() {
             console.log(e);
         });
     if (!marketInfo) return;
-    console.log("marketInfo",marketInfo);
-
-
-
 
 
     clientMCAP.guilds.cache.forEach((guild) => {
@@ -89,5 +85,5 @@ async function setNicknameMarket() {
     });
 }
 
-setInterval(setNicknameMarket, 10000);
+setInterval(setNicknameMarket, 5 * 60000);
 setNicknameMarket();
