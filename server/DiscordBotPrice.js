@@ -75,7 +75,7 @@ async function setNicknameMarket() {
         guild.members.cache.get(clientMCAP.user.id).setNickname(`${marketInfo.market_cap} MCAP`);
     });
     clientAPR.guilds.cache.forEach((guild) => {
-        guild.members.cache.get(clientAPR.user.id).setNickname(`${marketInfo.annual_percentage_yield} APY`);
+        guild.members.cache.get(clientAPR.user.id).setNickname(`${marketInfo.annual_percentage_yield} APR`);
     });
     clientSTAKED.guilds.cache.forEach((guild) => {
         guild.members.cache.get(clientSTAKED.user.id).setNickname(`${marketInfo.pion_staked_in_staking} STAKED`);
