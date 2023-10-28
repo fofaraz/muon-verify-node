@@ -37,7 +37,7 @@ export default defineEventHandler(async (event) => {
     if (discordUser.verified)
         return {success: false, message: "This Node ID already owned by another discord user"};
 
-    let assignRoleResult = await DiscordBotOwnershipVerify.assignRole(process.env.GUILD_ID, body.discordId, ROLE_NAME)
+    let assignRoleResult = await DiscordBotOwnershipVerify.assignRole(process.env.GUILD_ID, body.discordId, ROLE_NAME, body.nodeId)
         .then(() => {
             return {success: true, message: ""}
         })

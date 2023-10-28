@@ -69,7 +69,7 @@ client.on('interactionCreate', async (interaction) => {
     }
 });
 
-export async function assignRole(guildId, userId, roleName) {
+export async function assignRole(guildId, userId, roleName, nodeId) {
     console.log("assignRole " + userId);
     let guild = await client.guilds.fetch(guildId);
     let member = await guild.members.fetch(userId);
@@ -77,7 +77,8 @@ export async function assignRole(guildId, userId, roleName) {
     await member.roles.add(role);
     let message = ":white_check_mark: Verification successful";
     message += "\nFrom now on, I will monitor the status of your node and inform you when it goes offline or online.";
-    message += "\nCurrent node status: Online";
+    if (nodeId)
+        message += "\nCurrent node status: " + Monitor.getNewState(nodeId);
     MessageManager.sendMessageToDiscordId(client, userId, message)
 }
 
@@ -95,3 +96,13 @@ async function setNickname() {
 }
 
 setInterval(setNickname, 60000);
+
+
+function getUsernameById() {
+    let thanos = client.users.fetch('1037623597834977300');
+    thanos.then(function (result1) {
+        console.log("xxx");
+        console.log(result1);
+    });
+}
+
