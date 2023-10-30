@@ -77,8 +77,14 @@ export async function assignRole(guildId, userId, roleName, nodeId) {
     await member.roles.add(role);
     let message = ":white_check_mark: Verification successful";
     message += "\nFrom now on, I will monitor the status of your node and inform you when it goes offline or online.";
-    if (nodeId)
-        message += "\nCurrent node status: " + Monitor.getNewState(nodeId);
+    if (nodeId) {
+        let currentStatus = await Monitor.getNewState(nodeId).catch(e => {
+            return;
+        });
+        if (currentStatus)
+            message += "\nCurrent node status: " + currentStatus;
+    }
+
     MessageManager.sendMessageToDiscordId(client, userId, message)
 }
 
