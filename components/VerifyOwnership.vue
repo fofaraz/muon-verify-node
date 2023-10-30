@@ -98,5 +98,6 @@
 <style scoped>
     .logo {
         height: 50px;
+        width: auto;
     }
 </style>
