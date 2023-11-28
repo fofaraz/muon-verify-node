@@ -41,25 +41,6 @@ clientSUPPLY.on('ready', () => {
     clientSUPPLY.user.setActivity('PION Network', {type: Discord.ActivityType.Watching});
 });
 
-async function setNicknamePrice() {
-    let price = await axios.get("http://mexc.com/open/api/v2/market/ticker?symbol=PION_USDT")
-        .then(({data}) => {
-            if (data.code == 200)
-                return data.data[0].last
-        })
-        .catch(e => {
-            console.log(e);
-        });
-    if (!price) return;
-    let nickname = `PION $${price}`;
-    clientPrice.guilds.cache.forEach((guild) => {
-        guild.members.cache.get(clientPrice.user.id).setNickname(nickname);
-    });
-}
-
-setInterval(setNicknamePrice, 5 * 60000);
-setNicknamePrice();
-
 async function setNicknameMarket() {
     let marketInfo = await axios.get("https://monitor-pion.muon.net/stats/data.json")
         .then(({data}) => {
@@ -71,6 +52,9 @@ async function setNicknameMarket() {
     if (!marketInfo) return;
 
 
+    clientPrice.guilds.cache.forEach((guild) => {
+        guild.members.cache.get(clientPrice.user.id).setNickname(`PION $${marketInfo.pion_price || '_'}`);
+    });
     clientMCAP.guilds.cache.forEach((guild) => {
         guild.members.cache.get(clientMCAP.user.id).setNickname(`${marketInfo.market_cap} MCAP`);
     });
