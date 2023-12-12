@@ -42,7 +42,7 @@ clientSUPPLY.on('ready', () => {
 });
 
 async function setNicknameMarket() {
-    let marketInfo = await axios.get("https://monitor-pion.muon.net/stats/data.json")
+    let marketInfo = await axios.get("https://app.muon.net/stats/data.json")
         .then(({data}) => {
             return data;
         })
@@ -53,7 +53,12 @@ async function setNicknameMarket() {
 
 
     clientPrice.guilds.cache.forEach((guild) => {
-        guild.members.cache.get(clientPrice.user.id).setNickname(`PION $${marketInfo.pion_price || '_'}`);
+        let price = marketInfo.pion_price;
+        if (price)
+            price = Math.round(price * 10000) / 10000;
+        else
+            price = "_";
+        guild.members.cache.get(clientPrice.user.id).setNickname(`PION $${price}`);
     });
     clientMCAP.guilds.cache.forEach((guild) => {
         guild.members.cache.get(clientMCAP.user.id).setNickname(`${marketInfo.market_cap} MCAP`);
